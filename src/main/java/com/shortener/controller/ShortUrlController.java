@@ -1,9 +1,7 @@
 package com.shortener.controller;
 
-import com.shortener.dto.CreateUrlRequest;
-import com.shortener.dto.UrlResponse;
-import com.shortener.service.ShortUrlService;
-import jakarta.validation.Valid;
+import java.net.URI;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
+import com.shortener.dto.CreateUrlRequest;
+import com.shortener.dto.UrlResponse;
+import com.shortener.service.ShortUrlService;
+
+import jakarta.validation.Valid;
 
 /**
  * The three endpoints.
@@ -57,17 +59,12 @@ public class ShortUrlController {
 
         String destination = service.resolveAndCount(code);
 
+        
         URI target = URI.create(destination);
 
-        // Built one step at a time. Each call hands back the builder, ready
-        // for the next instruction.
-        ResponseEntity.BodyBuilder builder = ResponseEntity.status(HttpStatus.FOUND);
-
-        builder = builder.location(target);
-
-        ResponseEntity<Void> response = builder.build();
-
-        return response;
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(target)
+                .build();
     }
 
     /** GET /api/urls/a3Xf9 - stats, without counting as a click. */
