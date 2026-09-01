@@ -35,6 +35,15 @@ curl -X POST http://localhost:9090/api/urls \
   -d '{"url": "https://github.com/rahulmaity0"}'
 ```
 
+On Windows PowerShell, use this instead - `curl` is an alias for something
+else there, and PowerShell strips the quotes out of the JSON body:
+
+```powershell
+Invoke-RestMethod -Uri http://localhost:9090/api/urls -Method Post `
+  -ContentType "application/json" `
+  -Body '{"url":"https://github.com/rahulmaity0"}'
+```
+
 ```json
 {
   "code": "a3Xf9Q",
