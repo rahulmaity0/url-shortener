@@ -81,6 +81,22 @@ using a code and generates a new one if it is already taken. It gives up after
 10 attempts rather than looping forever, since that many collisions in a row
 would mean something is badly wrong.
 
+## Tests
+
+```bash
+mvn test
+```
+
+Five integration tests using JUnit 5 and MockMvc. They start the real
+application with an in-memory database and send real requests through it -
+nothing is mocked out.
+
+- shortening a valid URL returns 201 and a code
+- a URL without http:// is rejected with 400
+- visiting a short link returns 302 with the right Location header
+- visiting a link twice moves the click count to 2
+- an unknown code returns 404 on both endpoints
+
 ## Project structure
 
 ```
@@ -98,7 +114,6 @@ controller/  the three endpoints
 - Links never expire
 - No custom aliases
 - No rate limiting
-- No tests yet
 
 ## If I took this further
 
