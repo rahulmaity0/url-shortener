@@ -1,5 +1,7 @@
 # URL Shortener
 
+[![CI](https://github.com/rahulmaity0/url-shortener/actions/workflows/ci.yml/badge.svg)](https://github.com/rahulmaity0/url-shortener/actions/workflows/ci.yml)
+
 A small REST API that turns long URLs into short ones. You POST a URL, get back
 a 6-character code, and visiting that code redirects you to the original link.
 It also keeps a count of how many times each link has been clicked.
